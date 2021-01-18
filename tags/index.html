@@ -413,10 +413,52 @@
             </div>
             <div class="tag-chips">
                 
+                
+                <a href="/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" title="注册中心: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="注册中心" style="background-color: #F9EBEA;">注册中心
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Nacos/" title="Nacos: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Nacos" style="background-color: #F5EEF8;">Nacos
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
             </div>
         </div>
     </div>
 </div>
+
+    
+    <link rel="stylesheet" type="text/css" href="/libs/jqcloud/jqcloud.css">
+<style type="text/css">
+    #tag-wordcloud {
+        width: 100%;
+        height: 300px;
+    }
+</style>
+
+<div class="container" data-aos="fade-up">
+    <div class="card">
+        <div id="tag-wordcloud" class="card-content"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/libs/jqcloud/jqcloud-1.0.4.min.js"></script>
+<script type="text/javascript">
+    
+
+    $('#tag-wordcloud').jQCloud([{"text":"注册中心","weight":1,"link":"/tags/注册中心/"},{"text":"Nacos","weight":1,"link":"/tags/Nacos/"}], {
+        autoResize: true
+    });
+</script>
 
     
 

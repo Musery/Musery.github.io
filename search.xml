@@ -4,13 +4,27 @@
   
     
     <entry>
-      <title>Hello World</title>
-      <link href="2021/01/18/hello-world/"/>
-      <url>2021/01/18/hello-world/</url>
+      <title>注册中心 - Nacos</title>
+      <link href="2020/12/01/Nacos/"/>
+      <url>2020/12/01/Nacos/</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></tbody></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></tbody></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></tbody></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></tbody></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="1-注册中心对比"><a href="#1-注册中心对比" class="headerlink" title="1.注册中心对比"></a>1.注册中心对比</h2><table><thead><tr><th></th><th>Nacos</th><th>Eureka</th><th>Consul</th><th>CoreDNS</th><th align="center">Zookeeper</th></tr></thead><tbody><tr><td>CAP模型</td><td>CP&amp;AP</td><td>AP</td><td>CP</td><td>-</td><td align="center">CP</td></tr><tr><td>健康检查</td><td>TCP/HTTP/MYSQL/CB</td><td>CB</td><td>TCP/HTTP/gRPC/Cmd</td><td>-</td><td align="center">Keep Alive</td></tr><tr><td>负载均衡策略</td><td>权重/metadata/Selector</td><td>Ribbon</td><td>Fabio</td><td>RoundRobin</td><td align="center">-</td></tr><tr><td>雪崩保护</td><td>有</td><td>有</td><td>无</td><td>无</td><td align="center">无</td></tr><tr><td>自动注销实例</td><td>支持</td><td>支持</td><td>不支持</td><td>不支持</td><td align="center">支持</td></tr><tr><td>协问协议</td><td>HTTP/DNS</td><td>HTTP</td><td>HTTP/DNS</td><td>DNS</td><td align="center">TCP</td></tr><tr><td>监听支持</td><td>支持</td><td>支持</td><td>支持</td><td>不支持</td><td align="center">支持</td></tr><tr><td>多数据中心</td><td>支持</td><td>支持</td><td>支持</td><td>不支持</td><td align="center">不支持</td></tr><tr><td>跨注册中心同步</td><td>支持</td><td>不支持</td><td>支持</td><td>不支持</td><td align="center">不支持</td></tr><tr><td>SpringCloud集成</td><td>支持</td><td>支持</td><td>支持</td><td>不支持</td><td align="center">不支持</td></tr><tr><td>Dubbo集成</td><td>支持</td><td>不支持</td><td>不支持</td><td>不支持</td><td align="center">支持</td></tr><tr><td>K8S集成</td><td>支持</td><td>不支持</td><td>支持</td><td>支持</td><td align="center">不支持</td></tr></tbody></table><h2 id="2-NACOS-优点"><a href="#2-NACOS-优点" class="headerlink" title="2.NACOS 优点"></a>2.NACOS 优点</h2><h3 id="1-Nacos支持CP、AP-针对每个服务实例都可设定CAP模型。"><a href="#1-Nacos支持CP、AP-针对每个服务实例都可设定CAP模型。" class="headerlink" title="1.Nacos支持CP、AP , 针对每个服务实例都可设定CAP模型。"></a>1.Nacos支持CP、AP , 针对每个服务实例都可设定CAP模型。</h3><p><code>curl -X PUT '$NACOS_SERVER:8848/nacos/v1/ns/operator/switches?entry=serverMode&amp;value=CP'</code></p><p>CAP模型, 其关注粒度是<strong>数据</strong>, 并非是整个系统。</p><p>​    一致性（Consistence)</p><p>​    可用性（Availability）</p><p>​    分区容忍性（Partition Tolerance）</p><p>​    在一个分布式系统中，当涉及读写操作时，只能保证一致性（Consistence）、可用性（Availability）、分区容错性（Partition Tolerance）3者中的2个，另一个必须被牺牲。</p><p>###2.Nacos配置中心功能</p><p>​    Nacos注册中心和配置中心一体化, 简化微服务处理的功能。</p><h3 id="3-Nacos支持多注册中心同步"><a href="#3-Nacos支持多注册中心同步" class="headerlink" title="3.Nacos支持多注册中心同步"></a>3.Nacos支持多注册中心同步</h3><p>​    Nacos有NacosSync同步组件，当前支持多种注册中心扩展。包括ZK,Eureka,Consul</p><h3 id="4-Nacos支持PostGreSQL"><a href="#4-Nacos支持PostGreSQL" class="headerlink" title="4.Nacos支持PostGreSQL"></a>4.Nacos支持PostGreSQL</h3><h2 id="3-NACOS缺点"><a href="#3-NACOS缺点" class="headerlink" title="3.NACOS缺点"></a>3.NACOS缺点</h2><h3 id="1-不支持MySQL8-0-版本"><a href="#1-不支持MySQL8-0-版本" class="headerlink" title="1.不支持MySQL8.0+版本"></a>1.不支持MySQL8.0+版本</h3><p>​    NACOS开源版本并不是不能实现支持8.0+, 可自行下载源码更改JDBC连接版本后实现支持8.0+版本MYSQL</p><h2 id="4-源码"><a href="#4-源码" class="headerlink" title="4.源码"></a>4.源码</h2><p>address模块: 主要查询nacos集群中节点个数以及IP的列表</p><p>api模块: 主要给客户端调用的api接口的抽象</p><p>common模块: 主要是通用的工具包和字符串常量的定义</p><p>client模块: 主要是对依赖api模块和common模块,对api的接口的实现,给nacos的客户端使用</p><p>cmdb模块: 主要是操作的数据的存储在内存中,该模块提供一个查询数据标签的接口</p><p>config模块: 主要是服务配置的管理, 提供api给客户端拉去配置信息,以及提供更新配置 的,客户端通过长轮询的更新配置信息</p><p>naming模块: 主要是作为服务注册中心的实现模块,具备服务的注册和服务发现的功能</p><p>console模块: 主要是实现控制台的功能.具有权限校验、服务状态、健康检查等功能</p><p>core模块: 主要是实现Spring的PropertySource的后置处理器,用于加载nacos的default的配置信息</p><p>distribution模块: 主要是打包nacos-server的操作,使用maven-assembly-plugin进行自定义打包</p><p>​    </p>]]></content>
       
       
+      <categories>
+          
+          <category> 中间件 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 注册中心 </tag>
+            
+            <tag> Nacos </tag>
+            
+        </tags>
       
     </entry>
     
